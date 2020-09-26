@@ -1,5 +1,5 @@
 # Dating App
 
-- .Net 5
-- ASP.Net
+- .NET 5
+- ASP.NET Web API
 - Entity Framework
