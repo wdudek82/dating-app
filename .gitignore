@@ -2,3 +2,7 @@
 
 bin/
 obj/
+
+# SQLite
+*.db-shm
+*.db-wal
