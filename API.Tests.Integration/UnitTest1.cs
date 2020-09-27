@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using API.Entities;
 using RestSharp;
@@ -19,9 +18,9 @@ namespace API.Tests.Integration
         [Fact]
         public async void Test1()
         {
-            // var client = new RestClient();
-            // var req = new RestRequest("https://localhost:5001/api/users");
-            // var res = await client.GetAsync<IEnumerable<AppUser>>(req);
+            var client = new RestClient();
+            var req = new RestRequest("https://localhost:5001/api/users");
+            var res = await client.GetAsync<IEnumerable<AppUser>>(req);
         }
     }
 }
