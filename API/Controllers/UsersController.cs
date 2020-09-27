@@ -22,17 +22,19 @@ namespace API.Controllers
         public ActionResult<IEnumerable<AppUser>> GetUsers()
         {
             var users = _context.Users.ToList();
+
             return users;
         }
 
         [HttpGet("{id}")]
         public ActionResult<AppUser> GetUser(int id)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            var user = _context.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
+
             return Ok(user);
         }
     }
