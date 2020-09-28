@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 interface AppUser {
   id: number;
@@ -7,13 +7,13 @@ interface AppUser {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
-  title = 'DatingApp';
-  appUsers: AppUser[] = [];
+  title = "DatingApp";
+  users: AppUser[];
 
   constructor(private http: HttpClient) {}
 
@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.http.get<AppUser[]>('https://localhost:5001/api/users').subscribe(
+    this.http.get<AppUser[]>("https://localhost:5001/api/users").subscribe(
       (users) => {
-        this.appUsers = users ?? [];
+        this.users = users;
       },
       (error) => {
         console.error(error);

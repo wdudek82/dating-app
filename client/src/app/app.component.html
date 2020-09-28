@@ -1,3 +1,11 @@
 <h1>The DatingApp</h1>
 
-<div *ngFor="let appUser of appUsers">{{ appUser | json}}</div>
+<ul *ngIf="users; else noAppUsers">
+  <li *ngFor="let user of users">
+    id: {{ user.id }}, name: {{ user.userName }}
+  </li>
+</ul>
+
+<ng-template #noAppUsers>
+  <div>Loading...</div>
+</ng-template>
