@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -39,6 +40,30 @@ namespace API.Controllers
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<AppUser>> Login(LoginDto loginDto)
+        {
+            var user = await _context.Users
+                .SingleOrDefaultAsync(u => u.UserName == loginDto.Username.ToLower().Trim());
+
+            if (user == null)
+            {
+                return Unauthorized("Invalid username");
+            }
+
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+            var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+            var isDifferent = computeHash.Where((t, i) => t != user.PasswordHash[i]).Any();
+            if (isDifferent)
+            {
+                return Unauthorized("Invalid password");
+            }
+
 
             return user;
         }
