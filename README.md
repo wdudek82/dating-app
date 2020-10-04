@@ -12,3 +12,5 @@
 ## Frontend
 
 - Angular 10 (LTS)
+- ngx-bootstrap 6.1.0
+- font awesome 4.7.0
