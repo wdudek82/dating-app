@@ -1,5 +1,3 @@
-using API.Services;
-
 namespace API.DTOs
 {
     public class UserDto
