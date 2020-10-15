@@ -1,10 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AccountService } from "../_services/account.service";
-
-export interface AppUser {
-  username: string;
-  password: string;
-}
+import { User } from "../_models/user";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-nav",
@@ -12,29 +9,30 @@ export interface AppUser {
   styleUrls: ["./nav.component.css"],
 })
 export class NavComponent implements OnInit {
-  model: AppUser = {
+  model: object = {
     username: "",
     password: "",
   };
-  loggedIn: boolean = false;
+  username = "";
 
-  constructor(private accountService: AccountService) {
-  }
+  constructor(public accountService: AccountService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  login() {
+  login(): void {
     console.log(this.model);
 
-    this.accountService.login(this.model)
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.loggedIn = true;
-        },
-        (error) => {
-          console.error(error);
-        });
+    this.accountService.login(this.model).subscribe(
+      (user) => {
+        console.log(user);
+      },
+      (error) => {
+        console.error(error);
+      },
+    );
+  }
+
+  logout(): void {
+    this.accountService.logout();
   }
 }
