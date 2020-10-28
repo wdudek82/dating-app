@@ -14,16 +14,27 @@ export class AccountService {
 
   constructor(private http: HttpClient) {}
 
-  login(model: object): Observable<void> {
+  login(model: object): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/account/login`, model).pipe(
-      map((res) => {
-        const user = res;
+      map((user) => {
         if (user) {
           localStorage.setItem("user", JSON.stringify(user));
           this.currentUserSource.next(user);
         }
-        // return res;
+        return user;
       }),
+    );
+  }
+
+  register(model: any): Observable<User> {
+    return this.http.post<User>(this.baseUrl + "/account/register", model).pipe(
+      map((user) => {
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
+          this.currentUserSource.next(user);
+        }
+        return user;
+      })
     );
   }
 
