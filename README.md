@@ -13,4 +13,6 @@
 
 - Angular 10 (LTS)
 - ngx-bootstrap 6.1.0
+- bootswatch
 - font awesome 4.7.0
+- toastr
