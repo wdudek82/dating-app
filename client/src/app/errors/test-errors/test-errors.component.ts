@@ -19,7 +19,7 @@ export class TestErrorsComponent implements OnInit {
         console.log(res);
       },
       (error) => {
-        console.warn(error);
+        console.log(error);
       },
     );
   }
@@ -30,7 +30,7 @@ export class TestErrorsComponent implements OnInit {
         console.log(res);
       },
       (error) => {
-        console.warn(error);
+        console.log(error);
       },
     );
   }
@@ -41,7 +41,7 @@ export class TestErrorsComponent implements OnInit {
         console.log(res);
       },
       (error) => {
-        console.warn(error);
+        console.log(error);
       },
     );
   }
@@ -52,7 +52,7 @@ export class TestErrorsComponent implements OnInit {
         console.log(res);
       },
       (error) => {
-        console.warn(error);
+        console.log(error);
       },
     );
   }
