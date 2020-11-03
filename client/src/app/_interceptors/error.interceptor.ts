@@ -34,25 +34,26 @@ export class ErrorInterceptor implements HttpInterceptor {
     switch (error.status) {
       case 400:
       case 401:
-        if (error?.error?.errors) {
-          ErrorInterceptor.handleModalStateErrors(error.error.errors);
-        } else {
-          this.toastr.error(error.statusText, error.status);
-        }
+        this.handle400And401Error(error);
         break;
       case 404:
         this.router.navigateByUrl("/not-found");
         break;
       case 500:
-        const navigationExtras: NavigationExtras = {
-          state: { error: error.error },
-        };
-        this.router.navigateByUrl("/server-error", navigationExtras);
+        this.handle500ServerError(error);
         break;
       default:
         this.toastr.error("Something unexpected went wrong.");
         console.error(error);
         break;
+    }
+  }
+
+  private handle400And401Error(error) {
+    if (error?.error?.errors) {
+      ErrorInterceptor.handleModalStateErrors(error.error.errors);
+    } else {
+      this.toastr.error(error.statusText, error.status);
     }
   }
 
@@ -66,5 +67,12 @@ export class ErrorInterceptor implements HttpInterceptor {
       }
     }
     throw modalStateErrors.flat();
+  }
+
+  private handle500ServerError(error) {
+    const navigationExtras: NavigationExtras = {
+      state: { error: error.error },
+    };
+    this.router.navigateByUrl("/server-error", navigationExtras);
   }
 }
