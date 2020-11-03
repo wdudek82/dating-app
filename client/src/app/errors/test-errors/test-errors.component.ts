@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Route, Router } from "@angular/router";
 
 @Component({
   selector: "app-test-errors",
@@ -8,8 +9,9 @@ import { HttpClient } from "@angular/common/http";
 })
 export class TestErrorsComponent implements OnInit {
   baseUrl = "https://localhost:5001/api/";
+  validationErrors: string[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -20,6 +22,7 @@ export class TestErrorsComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+        this.router.navigateByUrl("/not-found");
       },
     );
   }
@@ -64,6 +67,7 @@ export class TestErrorsComponent implements OnInit {
       },
       (error) => {
         console.warn(error);
+        this.validationErrors = error;
       },
     );
   }
