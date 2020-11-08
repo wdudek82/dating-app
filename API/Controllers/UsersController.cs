@@ -20,14 +20,14 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            var users = _userRepository.GetUsersAsync();
+            var users = await _userRepository.GetUsersAsync();
             return Ok(users);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUser(int id)
+        public async Task<ActionResult<AppUser>> GetUser(string username)
         {
-            var user = _userRepository.GetUserByIdAsync(id);
+            var user = await _userRepository.GetUserByUsernameAsync(username);
             if (user == null)
             {
                 return NotFound();
